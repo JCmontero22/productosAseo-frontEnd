@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">Avatar masculino</title>
+  <desc id="desc">Ilustracion simple de perfil masculino para usuario administrador.</desc>
+  <rect width="120" height="120" rx="60" fill="#17a899"/>
+  <circle cx="60" cy="46" r="24" fill="#f4d2bd"/>
+  <path d="M34 45c2-20 15-31 33-28 12 2 20 11 22 24-12-5-25-4-39-15-4 8-8 13-16 19z" fill="#0f172a"/>
+  <path d="M28 104c5-24 18-36 32-36s27 12 32 36H28z" fill="#0f172a"/>
+  <path d="M45 79c4 6 9 9 15 9s11-3 15-9c-4-3-9-5-15-5s-11 2-15 5z" fill="#ffffff" opacity=".9"/>
+</svg>

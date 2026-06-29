@@ -1,0 +1,68 @@
+<div class="search-filter-bar">
+    <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" class="search-input" placeholder="Buscar permisos...">
+    </div>
+    <button class="btn btn-success" (click)="abrirModalPermisos()">
+        <i class="fas fa-plus"></i> Nuevo Permiso
+    </button>
+</div>
+
+<div class="table-wrapper">
+    <table class="generic-table">
+        <thead>
+            <tr>
+                <th>Nombre del Permiso</th>
+                <th>Slug</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (permiso of permisos(); track permiso.id){
+                <tr>
+                    <td><strong>{{ permiso.nombre }}</strong></td>
+                    <td>{{ permiso.slug }}</td>
+                    <td>{{ permiso.descripcion }}</td>
+                    <td><span class="status-badge status-active">{{ permiso.estado.nombre }}</span></td>
+                    <td>
+                        <div class="actions-cell">
+                            <button class="btn-action btn-edit" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-action btn-delete" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td><strong>Crear Usuarios</strong></td>
+                <td>Permite crear nuevos usuarios</td>
+                <td><span class="badge badge-user">Usuarios</span></td>
+                <td><span class="status-badge status-active">Activo</span></td>
+                <td>
+                    <div class="actions-cell">
+                        <button class="btn-action btn-edit" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action btn-delete" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@if (infoPagination()) {
+    <app-pagination [pagination]="infoPagination()!" (pageChange)="obtenerPermisos($event)"></app-pagination>
+}
+
+
+<!-- Modal de Permisos -->
+<app-form-permisos></app-form-permisos>

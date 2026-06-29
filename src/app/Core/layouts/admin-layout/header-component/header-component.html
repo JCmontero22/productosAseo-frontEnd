@@ -1,0 +1,34 @@
+<div class="admin-header">
+    <div class="header-brand">
+        <button
+            class="menu-toggle"
+            type="button"
+            (click)="toggleSidebar.emit()"
+            [attr.aria-expanded]="!sidebarCollapsed"
+            [attr.aria-label]="sidebarCollapsed ? 'Abrir menu' : 'Ocultar menu'">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <i class="fa-solid fa-jug-detergent" aria-hidden="true"></i>
+        <div>
+            <span class="header-kicker">Panel administrativo</span>
+            <h1>EcoClean</h1>
+        </div>
+    </div>
+
+    <div class="header-actions">
+        <button class="header-icon-btn" type="button" aria-label="Notificaciones">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown">
+            <button class="user-chip dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <span>Admin</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><button class="dropdown-item" type="button" (click)="logout()">Cerrar sesión</button></li>
+              <li><button class="dropdown-item" type="button">Another action</button></li>
+              <li><button class="dropdown-item" type="button">Something else here</button></li>
+            </ul>
+        </div>
+    </div>
+</div>

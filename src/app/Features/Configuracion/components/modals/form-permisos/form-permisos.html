@@ -1,0 +1,61 @@
+<div class="modal fade" id="crearPermisos" #crearPermisos tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Crear Nuevo Permiso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Cerrar"></button>
+            </div>
+
+            <!-- Modal Body -->
+             <form id="formCrearPermiso" class="permiso-form" [formGroup]="permisoForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Nombre Permiso -->
+                            <div class="form-group">
+                                <label class="form-label required" for="nombrePermiso">Nombre Permiso</label>
+                                <input type="text" id="nombrePermiso" class="form-control" placeholder="Ej: Crear Permis" formControlName="nombre_permiso" [class.is-invalid]="permisoForm.get('nombre_permiso')?.invalid && permisoForm.get('nombre_permiso')?.touched">
+                                <div class="invalid-feedback">
+                                    El nombre del permiso es obligatorio.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Slug Permiso -->
+                            <div class="form-group">
+                                <label class="form-label required" for="inputSlug">Slug Permiso</label>
+                                <input type="text" id="inputSlug" name="slug" class="form-control" placeholder="ej: crear_usuario" formControlName="slug_permiso" [class.is-invalid]="permisoForm.get('slug_permiso')?.invalid && permisoForm.get('slug_permiso')?.touched">
+                                <div class="invalid-feedback">
+                                    El slug del permiso es obligatorio.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Descripcion Permiso -->
+                            <div class="form-group">
+                            <label class="form-label required" for="inputDescripcion">Descripcion Permiso</label>
+                            <textarea id="inputDescripcion" name="descripcion" class="form-control" placeholder="Ej: Permiso para crear usuarios" formControlName="descripcion_permiso" [class.is-invalid]="permisoForm.get('descripcion_permiso')?.invalid && permisoForm.get('descripcion_permiso')?.touched"></textarea>
+                            <div class="invalid-feedback">
+                                La descripción del permiso es obligatoria.
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Crear Permiso
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

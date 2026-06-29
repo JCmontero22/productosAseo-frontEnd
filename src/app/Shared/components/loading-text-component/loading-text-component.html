@@ -1,0 +1,13 @@
+@if (
+    loadingService.isLoading()
+    &&
+    loadingService.loadingType() === 'text'
+) {
+
+    <div class="loading-overlay">
+
+        <div class="loader"></div>
+
+    </div>
+
+}

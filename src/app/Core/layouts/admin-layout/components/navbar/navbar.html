@@ -1,0 +1,76 @@
+<!-- Sidebar Navigation -->
+<nav class="sidebar" role="navigation" aria-label="Sidebar navigation" [class.sidebar-collapsed]="collapsed">
+    <div class="sidebar-panel" id="sidebarNav">
+        <!-- Navigation Header -->
+        <div class="sidebar-profile">
+            <img class="sidebar-avatar" src="images/avatar-male.svg" alt="Avatar de usuario">
+            <div class="sidebar-user-info">
+                <span class="sidebar-user-role">Administrador</span>
+                <strong>Admin EcoClean</strong>
+            </div>
+        </div>
+
+        <h6 class="sidebar-heading">
+            <span>Navigation</span>
+        </h6>
+
+        <!-- Main Navigation -->
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="router.url.includes('/dashboard')" aria-current="page" routerLink="/admin/dashboard" (click)="onNavLinkClick()">
+                    <i class="fas fa-home me-2" aria-hidden="true"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#orders" (click)="onNavLinkClick()">
+                    <i class="fas fa-file-alt me-2" aria-hidden="true"></i>
+                    Orders
+                </a>
+            </li>
+
+          <!-- Products con submenu colapsable -->
+            <li class="nav-item">
+                <a class="nav-link d-flex justify-content-between align-items-center" href="#" (click)="$event.preventDefault(); submenuProductsOpen = !submenuProductsOpen" [class.open]="submenuProductsOpen" [attr.aria-expanded]="submenuProductsOpen">
+                    <span><i class="fas fa-shopping-cart me-2" aria-hidden="true"></i> Products</span>
+                    <i class="fas fa-chevron-down small"></i>
+                </a>
+                <ul class="nav flex-column collapse-submenu ms-3" [class.show]="submenuProductsOpen">
+                    <li class="nav-item"><a class="nav-link" routerLink="/admin/products/all" (click)="onNavLinkClick()">All Products</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/admin/products/new" (click)="onNavLinkClick()">Create Product</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#customers" (click)="onNavLinkClick()">
+                    <i class="fas fa-users me-2" aria-hidden="true"></i>
+                    Customers
+                </a>
+            </li>
+        </ul>
+
+        <!-- Secondary Navigation -->
+        <h6 class="sidebar-heading">
+            <span>Configuraciones</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <!-- Settings con submenu colapsable -->
+            <li class="nav-item">
+                <a class="nav-link d-flex justify-content-between align-items-center" href="#" (click)="$event.preventDefault(); submenuSettingsOpen = !submenuSettingsOpen" [class.open]="submenuSettingsOpen" [attr.aria-expanded]="submenuSettingsOpen">
+                    <span><i class="fas fa-cog me-2" aria-hidden="true"></i> Configuraciones</span>
+                    <i class="fas fa-chevron-down small"></i>
+                </a>
+                <ul class="nav flex-column collapse-submenu ms-3" [class.show]="submenuSettingsOpen">
+                    <li class="nav-item"><a class="nav-link" routerLink="/admin/configuraciones/usuarios" (click)="onNavLinkClick()">Usuarios</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/admin/configuraciones/seguridad" (click)="onNavLinkClick()">Seguridad</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reports" (click)="onNavLinkClick()">
+                    <i class="fas fa-chart-bar me-2" aria-hidden="true"></i>
+                    Reports
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

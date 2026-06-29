@@ -1,0 +1,59 @@
+<div class="search-filter-bar">
+    <div class="filter-container">
+        <label class="form-label" style="margin-bottom: 0.5rem;">Selecciona un tipo de usuario:</label>
+        <select class="filter-select">
+            <option value="">-- Seleccionar --</option>
+            <option value="admin">Administrador</option>
+            <option value="user">Usuario Estándar</option>
+            <option value="viewer">Visualizador</option>
+        </select>
+    </div>
+</div>
+
+<div class="table-wrapper">
+    <table class="generic-table">
+        <thead>
+            <tr>
+                <th style="width: 50px;"><input type="checkbox" class="check-all" aria-label="Seleccionar todos"></th>
+                <th>Permiso</th>
+                <th>Descripción</th>
+                <th>Módulo</th>
+                <th style="width: 80px;">Asignado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" class="row-check" checked></td>
+                <td><strong>Ver Usuarios</strong></td>
+                <td>Permite visualizar la lista de usuarios</td>
+                <td><span class="badge badge-admin">Usuarios</span></td>
+                <td><span class="status-badge status-active">Sí</span></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="row-check" checked></td>
+                <td><strong>Crear Usuarios</strong></td>
+                <td>Permite crear nuevos usuarios</td>
+                <td><span class="badge badge-user">Usuarios</span></td>
+                <td><span class="status-badge status-active">Sí</span></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="row-check"></td>
+                <td><strong>Eliminar Usuarios</strong></td>
+                <td>Permite eliminar usuarios</td>
+                <td><span class="badge badge-viewer">Usuarios</span></td>
+                <td><span class="status-badge status-inactive">No</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+    <button class="btn btn-secondary">
+        <i class="fas fa-times"></i>
+        Cancelar
+    </button>
+    <button class="btn btn-success">
+        <i class="fas fa-check"></i>
+        Guardar Permisos
+    </button>
+</div>

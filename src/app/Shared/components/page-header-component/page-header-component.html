@@ -1,0 +1,49 @@
+<div class="page-header">
+    <div class="header-content">
+        <h1 class="page-title">{{ title() }}</h1>
+        <p class="page-subtitle">{{ subtitle() }}</p>
+    </div>
+
+    @if (showBtnPrincipal()) {
+        <button
+            type="button"
+            class="btn-primary-action"
+            [attr.title]="btnPrincipalText()"
+            (click)="onPrimaryBtnClick()">
+            <i [class]="'fas ' + primaryBtnIcon()"></i>{{ btnPrincipalText() }}
+        </button>
+    }
+</div>
+
+<!-- Search and Filter Bar -->
+@if (showSearch() || showFilter()) {
+    <div class="search-filter-bar">
+        @if (showSearch()) {
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="{{ searchPlaceholder() }}"
+                    (input)="onSearch($event)"
+                    aria-label="Buscar">
+            </div>
+        }
+
+        @if (showFilter() && filterOptions().length > 0) {
+            <div class="filter-container">
+                <!-- <label [for]="filterLabel() + '-select'" class="filter-label">{{ filterLabel() }}</label> -->
+                <select
+                    [id]="filterLabel() + '-select'"
+                    class="filter-select"
+                    (change)="onFilter($event)"
+                    [attr.aria-label]="'Filtrar por ' + filterLabel()">
+                    <option value="">Todos</option>
+                    @for (option of filterOptions(); track option.value) {
+                        <option [value]="option.value">{{ option.label }}</option>
+                    }
+                </select>
+            </div>
+        }
+    </div>
+}

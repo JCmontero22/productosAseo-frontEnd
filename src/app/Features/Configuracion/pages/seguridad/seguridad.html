@@ -1,0 +1,54 @@
+<div class="seguridad-container">
+
+    <app-page-header-component [title]="'Gestion de seguridad'" [subtitle]="'Administra la seguridad del sistema.'"></app-page-header-component>
+
+    <div class="tabs-wrapper">
+        <ul class="nav nav-tabs custom-tabs" id="seguridadTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="permisos-tab" data-bs-toggle="tab" data-bs-target="#permisosContent" type="button" role="tab" aria-controls="permisosContent" aria-selected="true">
+                    <i class="fas fa-lock"></i>
+                    <span>Permisos</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tipoUsuarios-tab" data-bs-toggle="tab" data-bs-target="#tipoUsuariosContent" type="button" role="tab" aria-controls="tipoUsuariosContent" aria-selected="false">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Tipos de Usuarios</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tipoUsuariosPermisos-tab" data-bs-toggle="tab" data-bs-target="#tipoUsuariosPermisosContent" type="button" role="tab" aria-controls="tipoUsuariosPermisosContent" aria-selected="false">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Asignar Permisos</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tabs Content -->
+    <div class="tab-content" id="seguridadTabsContent">
+
+        <!-- Tab 1: Permisos -->
+        <div class="tab-pane fade show active" id="permisosContent" role="tabpanel" aria-labelledby="permisos-tab">
+            <app-tab-pane-permisos></app-tab-pane-permisos>
+        </div>
+
+        <!-- Tab 2: Tipos de Usuarios -->
+        <div class="tab-pane fade" id="tipoUsuariosContent" role="tabpanel" aria-labelledby="tipoUsuarios-tab">
+            <app-tab-pane-tipo-usuarios></app-tab-pane-tipo-usuarios>
+        </div>
+
+        <!-- Tab 3: Asignar Permisos a Tipos de Usuarios -->
+        <div class="tab-pane fade" id="tipoUsuariosPermisosContent" role="tabpanel" aria-labelledby="tipoUsuariosPermisos-tab">
+            <app-tab-pane-asignar-permisos></app-tab-pane-asignar-permisos>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal: Crear Permiso (Bootstrap 5) -->
+
+
+
+<!-- Modal: Crear Tipos de Usuario (Bootstrap 5) -->
+

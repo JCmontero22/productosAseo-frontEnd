@@ -1,0 +1,60 @@
+<div class="search-filter-bar">
+    <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" class="search-input" placeholder="Buscar tipos de usuarios...">
+    </div>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearTiposUsuario"> <i class="fas fa-plus"></i> Nuevo Tipo </button>
+</div>
+
+<div class="table-wrapper">
+    <table class="generic-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Usuarios</th>
+                <th>Creado</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Administrador</strong></td>
+                <td>Acceso completo al sistema</td>
+                <td><span class="badge">5</span></td>
+                <td>01/01/2024</td>
+                <td><span class="status-badge status-active">Activo</span></td>
+                <td>
+                    <div class="actions-cell">
+                        <button class="btn-action btn-edit" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action btn-delete" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Usuario Estándar</strong></td>
+                <td>Acceso limitado a módulos básicos</td>
+                <td><span class="badge">12</span></td>
+                <td>15/02/2024</td>
+                <td><span class="status-badge status-active">Activo</span></td>
+                <td>
+                    <div class="actions-cell">
+                        <button class="btn-action btn-edit" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action btn-delete" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-form-tipo-usuario></app-form-tipo-usuario>

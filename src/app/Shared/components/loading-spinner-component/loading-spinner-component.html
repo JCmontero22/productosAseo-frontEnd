@@ -1,0 +1,12 @@
+@if (
+    loadingService.isLoading()
+    &&
+    loadingService.loadingType() === 'spinner'
+) {
+    <div class="loading-overlay">
+
+        <div class="loader"></div>
+
+    </div>
+
+}

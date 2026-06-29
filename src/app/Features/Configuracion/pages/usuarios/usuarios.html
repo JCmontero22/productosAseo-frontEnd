@@ -1,0 +1,259 @@
+<!-- Componente modal de permisos incluido -->
+<app-form-permisos></app-form-permisos>
+
+<!-- Botón para abrir modal de permisos -->
+<div class="mb-3">
+    <button class="btn btn-primary" (click)="abrirPermisosModal()">
+        <i class="fas fa-user-shield"></i> Crear Permiso
+    </button>
+</div>
+
+<div class="usuarios-container">
+    <!-- Page Header con búsqueda y filtro -->
+    <app-page-header-component
+        [title]="'Usuarios'"
+        [subtitle]="'Administra los usuarios del sistema, sus roles y permisos.'"
+        [showBtnPrincipal]="true"
+        [btnPrincipalText]="'Nuevo Usuario'"
+        [primaryBtnIcon]="'fa-user-plus'"
+        [showSearch]="true"
+        [searchPlaceholder]="'Buscar por nombre o email...'"
+        [showFilter]="true"
+        [filterLabel]="'Rol'"
+        [filterOptions]="rolesOptions"
+        (primaryBtnClick)="abrirModal()"
+        (search)="onBusqueda($event)"
+        (filter)="onFiltroRol($event)">
+    </app-page-header-component>
+
+    <!-- Users Table -->
+    <div class="table-wrapper">
+        <table class="generic-table" role="table">
+            <thead>
+                <tr>
+                    <th role="columnheader" scope="col">
+                        <input type="checkbox" class="check-all" aria-label="Seleccionar todos">
+                    </th>
+                    <th role="columnheader" scope="col">Nombre</th>
+                    <th role="columnheader" scope="col">Email</th>
+                    <th role="columnheader" scope="col">Rol</th>
+                    <th role="columnheader" scope="col">Estado</th>
+                    <th role="columnheader" scope="col">Fecha de Creación</th>
+                    <th role="columnheader" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (usuariosFiltrados.length > 0) {
+                    @for (usuario of usuariosFiltrados; track usuario.id) {
+                        <tr class="user-row">
+                            <td>
+                                <input type="checkbox" class="row-check" [attr.aria-label]="'Seleccionar ' + usuario.nombre">
+                            </td>
+                            <td>
+                                <div class="user-name">
+                                    <img src="images/avatar-male.svg" alt="Avatar" class="user-avatar">
+                                    <span>{{ usuario.nombre }}</span>
+                                </div>
+                            </td>
+                            <td>{{ usuario.email }}</td>
+                            <td>
+                                <span class="badge" [class]="getRolBadgeClass(usuario.rol)">
+                                    {{ getRolTexto(usuario.rol) }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge" [class]="getEstadoBadgeClass(usuario.estado)">
+                                    {{ usuario.estado === 'activo' ? 'Activo' : 'Inactivo' }}
+                                </span>
+                            </td>
+                            <td>{{ usuario.fechaCreacion }}</td>
+                            <td>
+                                <div class="actions-cell">
+                                    <button class="btn-action btn-edit" title="Editar usuario" disabled>
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button
+                                        class="btn-action btn-delete"
+                                        title="Eliminar usuario"
+                                        (click)="eliminarUsuario(usuario.id)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                } @else {
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            <p>No se encontraron usuarios que coincidan con los filtros</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+        <div class="pagination-info">
+            Mostrando {{ usuariosFiltrados.length }} de {{ usuarios.length }} usuarios
+        </div>
+        <div class="pagination-controls">
+            <button class="pagination-btn" disabled>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Crear Usuario (Bootstrap 5) -->
+<div class="modal fade" id="modalCrearUsuario" #modalCrearUsuario tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Crear Nuevo Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" class="usuario-form">
+                    <!-- Nombre Completo -->
+                    <div class="form-group">
+                        <label class="form-label required" for="inputNombre">Nombre Completo</label>
+                        <input
+                            type="text"
+                            id="inputNombre"
+                            formControlName="nombre"
+                            class="form-control"
+                            [class.is-invalid]="usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched"
+                            placeholder="Ej: Juan García López">
+                        @if (usuarioForm.get('nombre')?.errors?.['required']) {
+                            <div class="invalid-feedback">El nombre es requerido</div>
+                        }
+                        @if (usuarioForm.get('nombre')?.errors?.['minlength']) {
+                            <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres</div>
+                        }
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label required" for="inputEmail">Correo Electrónico</label>
+                        <input
+                            type="email"
+                            id="inputEmail"
+                            formControlName="email"
+                            class="form-control"
+                            [class.is-invalid]="usuarioForm.get('email')?.invalid && usuarioForm.get('email')?.touched"
+                            placeholder="correo@ecoclean.com">
+                        @if (usuarioForm.get('email')?.errors?.['required']) {
+                            <div class="invalid-feedback">El email es requerido</div>
+                        }
+                        @if (usuarioForm.get('email')?.errors?.['email']) {
+                            <div class="invalid-feedback">Email inválido</div>
+                        }
+                    </div>
+
+                    <!-- Rol -->
+                    <div class="form-group">
+                        <label class="form-label required" for="selectRol">Rol de Usuario</label>
+                        <select
+                            id="selectRol"
+                            formControlName="rol"
+                            class="form-control"
+                            [class.is-invalid]="usuarioForm.get('rol')?.invalid && usuarioForm.get('rol')?.touched">
+                            <option value="">Seleccionar un rol...</option>
+                            <option value="admin">Administrador</option>
+                            <option value="supervisor">Supervisor</option>
+                            <option value="operario">Operario</option>
+                        </select>
+                        <div class="form-hint">Los administradores tienen acceso completo al sistema</div>
+                    </div>
+
+                    <!-- Contraseña y Confirmación -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required" for="inputPassword">Contraseña</label>
+                                <input
+                                    type="password"
+                                    id="inputPassword"
+                                    formControlName="password"
+                                    class="form-control"
+                                    [class.is-invalid]="usuarioForm.get('password')?.invalid && usuarioForm.get('password')?.touched"
+                                    placeholder="Min. 8 caracteres">
+                                @if (usuarioForm.get('password')?.errors?.['required']) {
+                                    <div class="invalid-feedback">La contraseña es requerida</div>
+                                }
+                                @if (usuarioForm.get('password')?.errors?.['minlength']) {
+                                    <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres</div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required" for="inputConfirmPassword">Confirmar Contraseña</label>
+                                <input
+                                    type="password"
+                                    id="inputConfirmPassword"
+                                    formControlName="confirmPassword"
+                                    class="form-control"
+                                    [class.is-invalid]="usuarioForm.get('confirmPassword')?.invalid && usuarioForm.get('confirmPassword')?.touched"
+                                    placeholder="Repetir contraseña">
+                                @if (usuarioForm.errors?.['passwordMismatch']) {
+                                    <div class="invalid-feedback">Las contraseñas no coinciden</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teléfono (Opcional) -->
+                    <div class="form-group">
+                        <label class="form-label" for="inputTelefono">Teléfono (Opcional)</label>
+                        <input
+                            type="tel"
+                            id="inputTelefono"
+                            formControlName="telefono"
+                            class="form-control"
+                            placeholder="+34 123 456 789">
+                    </div>
+
+                    <!-- Activo por Defecto -->
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input
+                                type="checkbox"
+                                id="checkActivo"
+                                formControlName="activo"
+                                class="form-check-input">
+                            <label class="form-check-label" for="checkActivo">
+                                Usuario Activo
+                            </label>
+                        </div>
+                        <div class="form-hint">Los usuarios inactivos no pueden acceder al sistema</div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    [disabled]="usuarioForm.invalid"
+                    (click)="onSubmit()">
+                    <i class="fas fa-check"></i> Crear Usuario
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

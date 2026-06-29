@@ -1,0 +1,79 @@
+:host {
+	--header-height: 5.6rem;
+	--sidebar-width: 232px;
+	display: block;
+}
+
+.app-layout {
+	background: var(--color-background);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.app-header {
+	background: var(--color-blanco);
+	box-shadow: 0 4px 18px rgba(15, 23, 42, 0.12);
+	min-height: var(--header-height);
+	/* Mantener el header en el flujo y usar sticky para no romper el diseño */
+	position: sticky;
+	top: 0;
+	z-index: 900;
+}
+
+.app-body {
+	display: flex;
+	flex: 1;
+	min-height: 0;
+	width: 100%;
+	/* No añadir padding extra aquí para preservar el diseño original */
+}
+
+.app-sidebar {
+	flex: 0 0 var(--sidebar-width);
+	/* Mantener la sidebar pegada bajo el header al hacer scroll */
+	position: sticky;
+	top: var(--header-height);
+	align-self: flex-start;
+	z-index: 850;
+	overflow: hidden;
+	transition: flex-basis 0.28s ease, width 0.28s ease;
+	width: var(--sidebar-width);
+}
+
+.main-content {
+	flex: 1;
+	min-width: 0;
+	padding: 2.4rem;
+	transition: padding 0.2s ease;
+}
+
+.app-layout.sidebar-collapsed .app-sidebar {
+	flex-basis: 0;
+	width: 0;
+}
+
+@media (max-width: 767.98px) {
+	.app-body {
+		display: block;
+	}
+
+	.app-sidebar {
+		bottom: 0;
+		flex: none;
+		left: 0;
+		overflow: visible;
+		position: fixed;
+		top: var(--header-height);
+		width: var(--sidebar-width);
+		z-index: 850;
+	}
+
+	.app-layout.sidebar-collapsed .app-sidebar {
+		width: 0;
+	}
+
+	.main-content {
+		padding: 1.4rem;
+	}
+}

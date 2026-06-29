@@ -1,0 +1,75 @@
+<!-- Modal: Crear Permiso -->
+<div class="modal fade" id="formPermisosModal" #modalPermisos tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Crear Nuevo Permiso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Cerrar"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form class="permiso-form">
+                    <!-- Nombre del Permiso -->
+                    <div class="form-group">
+                        <label class="form-label required" for="inputNombrePermiso">Nombre del Permiso</label>
+                        <input
+                            type="text"
+                            id="inputNombrePermiso"
+                            class="form-control"
+                            placeholder="Ej: Ver Usuarios"
+                            required>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="form-group">
+                        <label class="form-label required" for="inputDescripcion">Descripción</label>
+                        <textarea
+                            id="inputDescripcion"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Describe el permiso..."
+                            required></textarea>
+                    </div>
+
+                    <!-- Módulo -->
+                    <div class="form-group">
+                        <label class="form-label required" for="selectModulo">Módulo</label>
+                        <select id="selectModulo" class="form-control" required>
+                            <option value="">Seleccionar módulo...</option>
+                            <option value="usuarios">Usuarios</option>
+                            <option value="permisos">Permisos</option>
+                            <option value="reportes">Reportes</option>
+                            <option value="configuracion">Configuración</option>
+                        </select>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input
+                                type="checkbox"
+                                id="checkActivo"
+                                class="form-check-input"
+                                checked>
+                            <label class="form-check-label" for="checkActivo">
+                                Permiso Activo
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Crear Permiso
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

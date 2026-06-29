@@ -1,0 +1,23 @@
+<form class="content-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <p>Bienvenido de nuevo, por favor ingresa tus credenciales para acceder a tu cuenta.</p>
+            <div class="mb-3 mt-4">
+                <input type="text" class="form-control" placeholder="Usuario" formControlName="usuario" [class.is-invalid]="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched">
+                <div class="invalid-feedback">
+                    El nombre de usuario es requerido.
+                </div>
+
+
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                <div class="invalid-feedback">
+                    La contraseña es requerida.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" >Iniciar Sesión</button>
+        </div>
+    </div>
+</form>

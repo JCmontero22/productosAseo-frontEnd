@@ -1,0 +1,43 @@
+<div class="modal fade" id="crearTiposUsuario" #crearTiposUsuario tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Crear Tipos Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" (click)="cerrarModal()"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="formCrearTiposUsuario" class="tipos-usuario-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!-- Nombre Tipo Usuario -->
+                            <div class="form-group">
+                                <label class="form-label required" for="nombreTipoUsuario">Nombre Tipo Usuario</label>
+                                <input type="text" id="nombreTipoUsuario" class="form-control" placeholder="Ej: Administrador" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label required" for="descripcionTipoUsuario">Descripcion Tipo Usuario</label>
+                                <textarea id="descripcionTipoUsuario" name="descripcion" class="form-control" placeholder="Ej: Usuario con permisos administrativos" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button type="submit" form="formCrearTiposUsuario" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Crear Tipo Usuario
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
