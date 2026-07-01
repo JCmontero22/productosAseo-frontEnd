@@ -28,7 +28,7 @@
                     <td><span class="status-badge status-active">{{ permiso.estado.nombre }}</span></td>
                     <td>
                         <div class="actions-cell">
-                            <button class="btn-action btn-edit" title="Editar">
+                            <button class="btn-action btn-edit" title="Editar" (click)="editarPermiso(permiso.id)">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button class="btn-action btn-delete" title="Eliminar">
@@ -38,23 +38,6 @@
                     </td>
                 </tr>
             }
-
-            <tr>
-                <td><strong>Crear Usuarios</strong></td>
-                <td>Permite crear nuevos usuarios</td>
-                <td><span class="badge badge-user">Usuarios</span></td>
-                <td><span class="status-badge status-active">Activo</span></td>
-                <td>
-                    <div class="actions-cell">
-                        <button class="btn-action btn-edit" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn-action btn-delete" title="Eliminar">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -65,4 +48,4 @@
 
 
 <!-- Modal de Permisos -->
-<app-form-permisos></app-form-permisos>
+<app-form-permisos (guardarCambios)="recargarTabla()"></app-form-permisos>

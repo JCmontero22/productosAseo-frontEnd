@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, output, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PermisoService } from '../../../services/permiso.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../../Core/services/loading.service';
 import { AlerService } from '../../../../../Core/services/aler.service';
-import { ResponseObtenerPermisos } from '../../../interfaces/response-obtener-permisos';
+import { Permiso, ResponseObtenerPermisos } from '../../../interfaces/response-obtener-permisos';
 declare var bootstrap: any;
 @Component({
     selector: 'app-form-permisos',
@@ -25,7 +25,10 @@ export class FormPermisos implements AfterViewInit {
 
     //variables
     private modal: any = null;
-    
+    public mode = signal<'create' | 'edit'>('create');
+    public permisoActual = signal<Permiso | null>(null);
+    public guardarCambios = output<void>();
+
 
     //formulario
     public permisoForm = this.fb.nonNullable.group({
@@ -33,6 +36,16 @@ export class FormPermisos implements AfterViewInit {
         descripcion_permiso: ['', Validators.required],
         slug_permiso: ['', Validators.required],
     });
+
+    private mostrarModal(): void {
+
+        if (!this.modal) {
+            console.error('❌ Modal no inicializado');
+            return;
+        }
+
+        this.modal.show();
+    }
 
     ngAfterViewInit() {
         if (this.modalElement?.nativeElement) {
@@ -46,35 +59,59 @@ export class FormPermisos implements AfterViewInit {
         }
     }
 
-    abrirModal() {
-        if (this.modal) {
-            try {
-                this.modal.show();
-            } catch (error) {
-                console.error('Error al abrir modal:', error);
-            }
-        } else {
-            console.error('❌ Modal no está inicializado');
-        }
+    openCreateModal() {
+        this.mode.set('create');
+
+        this.permisoActual.set(null);
+
+        this.permisoForm.reset();
+
+        this.mostrarModal();
+    }
+
+    openEditModal(permiso: Permiso) {
+        this.mode.set('edit');
+
+        this.permisoActual.set(permiso);
+
+        this.permisoForm.patchValue({
+
+            nombre_permiso: permiso.nombre,
+
+            descripcion_permiso: permiso.descripcion,
+
+            slug_permiso: permiso.slug
+
+        });
+
+        this.mostrarModal();
     }
 
     cerrarModal() {
         try {
             if (this.modal) {
                 this.modal.hide();
+                this.permisoForm.reset();
+                this.permisoActual.set(null);
+                this.mode.set('create');
             }
         } catch (error) {
             console.error('Error al cerrar modal:', error);
         }
-
     }
 
     onSubmit() {
-        alert('Formulario enviado');
         if (!this.validarFormulario()) {
             return;
         }
-        this.registrarPermiso();
+
+        if (this.mode() === 'edit') {
+            // Aquí puedes agregar la lógica para actualizar el permiso existente
+            this.actualizarPermiso(this.permisoActual()?.id!);
+        } else {
+            // Aquí puedes agregar la lógica para crear un nuevo permiso
+            this.registrarPermiso();
+        }
     }
 
     private validarFormulario(): boolean {
@@ -94,14 +131,30 @@ export class FormPermisos implements AfterViewInit {
         this.permisoService.registrarPermiso(permisoData).subscribe({
             next: (response) => {
                 this.alertService.success(response.titulo, response.mensaje);
-                this.cerrarModal();
                 this.permisoForm.reset();
+                this.guardarCambios.emit();
+                this.cerrarModal();
             },
             error: (error) => {
                 console.error('Error al registrar permiso:', error);
             },
             complete: () => {
                 this.loadingService.hide();
+            }
+        });
+    }
+
+    private actualizarPermiso(id: number): void {
+        const permisoData = this.permisoForm.getRawValue();
+        this.permisoService.updatePermiso(id, permisoData).subscribe({
+            next: (response) => {
+                this.alertService.success(response.titulo, response.mensaje);
+                this.permisoForm.reset();
+                this.guardarCambios.emit();
+                this.cerrarModal();
+            },
+            error: (error) => {
+                console.error('Error al actualizar permiso:', error);
             }
         });
     }

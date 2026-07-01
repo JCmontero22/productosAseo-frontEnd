@@ -1,5 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
-import { InfoPagination } from '../../../Features/Configuracion/interfaces/response-obtener-permisos';
+import { Meta } from '../../../Features/Configuracion/interfaces/response-obtener-permisos';
 
 @Component({
   selector: 'app-pagination',
@@ -10,7 +10,7 @@ import { InfoPagination } from '../../../Features/Configuracion/interfaces/respo
 })
 export class Pagination {
 
-    pagination = input.required<InfoPagination>();
+    pagination = input.required<Meta>();
     pageChange = output<number>();
 
     pages = computed(() => {

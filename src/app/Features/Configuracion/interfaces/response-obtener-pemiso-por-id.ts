@@ -1,13 +1,13 @@
-export interface ResponseObtenerPermisos {
+export interface ResponseObtenerPemisoPorID {
   statusCode: number;
   titulo:     string;
   mensaje:    string;
   icono:      string;
-  data:       Permiso[];
-  meta:       Meta;
+  data:       Data;
+  meta:       any[];
 }
 
-export interface Permiso {
+export interface Data {
   id:             number;
   nombre:         string;
   descripcion:    string;
@@ -20,13 +20,3 @@ export interface Estado {
   id:     number;
   nombre: string;
 }
-
-export interface Meta {
-  current_page: number;
-  per_page:     number;
-  total:        number;
-  last_page:    number;
-  from:         number;
-  to:           number;
-}
-

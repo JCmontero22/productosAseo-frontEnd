@@ -1,0 +1,26 @@
+/* Ancho uniforme para las columnas de la tabla de permisos */
+.generic-table th:nth-child(1),
+.generic-table td:nth-child(1) {
+    width: 30%;
+}
+
+.generic-table th:nth-child(2),
+.generic-table td:nth-child(2) {
+    width: 20%;
+}
+
+.generic-table th:nth-child(3),
+.generic-table td:nth-child(3) {
+    width: 30%;
+}
+
+.generic-table th:nth-child(4),
+.generic-table td:nth-child(4) {
+    width: 10%;
+}
+
+.generic-table th:nth-child(5),
+.generic-table td:nth-child(5) {
+    width: 10%;
+    text-align: center;
+}

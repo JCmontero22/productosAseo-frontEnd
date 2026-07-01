@@ -108,7 +108,7 @@ export class Usuarios implements OnInit, AfterViewInit {
 
   abrirPermisosModal() {
     if (this.formPermisos) {
-      this.formPermisos.abrirModal();
+      this.formPermisos.openCreateModal();
     } else {
       console.error('Componente FormPermisos no encontrado');
     }

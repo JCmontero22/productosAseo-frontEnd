@@ -276,6 +276,7 @@ input, textarea, button {
 .generic-table {
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
 }
 
 .generic-table thead {
@@ -291,6 +292,9 @@ input, textarea, button {
     padding: 1.8rem 1.6rem;
     text-align: left;
     letter-spacing: 0.3px;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .generic-table td {
@@ -298,6 +302,9 @@ input, textarea, button {
     color: var(--color-primary);
     font-size: 1.3rem;
     padding: 1.6rem;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .generic-table tbody tr {

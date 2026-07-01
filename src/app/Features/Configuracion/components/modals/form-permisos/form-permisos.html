@@ -3,7 +3,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title">Crear Nuevo Permiso</h5>
+                <h5 class="modal-title">{{ mode() === 'create' ? 'Crear Nuevo Permiso' : 'Editar Permiso' }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Cerrar"></button>
             </div>
 
@@ -52,7 +52,7 @@
                         <i class="fas fa-times"></i> Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-check"></i> Crear Permiso
+                        <i class="fas fa-check"></i> {{ mode() === 'create' ? 'Crear Permiso' : 'Actualizar Permiso' }}
                     </button>
                 </div>
             </form>
